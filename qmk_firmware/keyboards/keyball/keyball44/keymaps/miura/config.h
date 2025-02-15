@@ -42,5 +42,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // 参考URL
 // https://mazcon.hatenablog.com/entry/2023/11/10/080000#%E3%83%9E%E3%82%A6%E3%82%B9%E3%82%B9%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%AB%E9%80%9F%E5%BA%A6%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88%E5%80%A4
-#define KEYBALL_CPI_DEFAULT 900 // マウス速度 (default: 500)
-#define KEYBALL_SCROLL_DIV_DEFAULT 5 // スクロール速度 (default: 4)
+#define KEYBALL_CPI_DEFAULT 800 // マウス速度 (default: 500)
+#define KEYBALL_SCROLL_DIV_DEFAULT 4 // スクロール速度 (default: 4)

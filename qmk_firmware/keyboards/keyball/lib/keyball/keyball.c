@@ -233,12 +233,14 @@ __attribute__((weak)) void keyball_on_apply_motion_to_mouse_scroll(keyball_motio
             break;
     }
 #endif
+#ifdef OS_DETECTION_ENABLE
     // windowsOSでスクロール方向反転
     // https://qiita.com/toxaO/items/a46d04a476d17975dee1
     if (detected_host_os() == OS_WINDOWS || detected_host_os() == OS_LINUX){
         r->h = -r->h;
         r->v = -r->v;
     }
+#endif
 }
 
 static void motion_to_mouse(keyball_motion_t *m, report_mouse_t *r, bool is_left, bool as_scroll) {

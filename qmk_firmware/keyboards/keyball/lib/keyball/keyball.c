@@ -24,7 +24,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "drivers/pmw3360/pmw3360.h"
 
 #include <string.h>
-
+#ifdef OS_DETECTION_ENABLE
+    #include "os_detection.h"  // OS 判定関連のヘッダーを追加
+#endif
 const uint8_t CPI_DEFAULT    = KEYBALL_CPI_DEFAULT / 100;
 const uint8_t CPI_MAX        = pmw3360_MAXCPI + 1;
 const uint8_t SCROLL_DIV_MAX = 7;
@@ -285,6 +287,15 @@ static uint16_t get_auto_mouse_keep_time(void) {
         return keyball_get_auto_mouse_timeout();
 #endif
 }
+
+#ifdef OS_DETECTION_ENABLE
+     // windowsOSでスクロール方向反転
+     // https://qiita.com/toxaO/items/a46d04a476d17975dee1
+     if (detected_host_os() == OS_WINDOWS || detected_host_os() == OS_LINUX){
+         r->h = -r->h;
+         r->v = -r->v;
+     }
+ #endif
 
 static uint16_t movement_size_of(report_mouse_t *rep) {
     return abs(rep->x) + abs(rep->y);

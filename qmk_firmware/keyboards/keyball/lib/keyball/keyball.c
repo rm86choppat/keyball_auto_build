@@ -658,6 +658,12 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
         return false;
     }
 
+#ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
+    if (keycode == KC_NO && record->event.pressed) {
+        layer_move(0); // ★ここ！空欄押したら解除
+    }
+#endif
+
     // strip QK_MODS part.
     if (keycode >= QK_MODS && keycode <= QK_MODS_MAX) {
         keycode &= 0xff;

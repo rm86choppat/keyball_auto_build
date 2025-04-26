@@ -134,6 +134,10 @@ static void add_scroll_div(int8_t delta) {
     keyball_set_scroll_div(v < 1 ? 1 : v);
 }
 
+static uint16_t get_auto_mouse_timeout(void) {
+    return AUTO_MOUSE_LAYER_KEEP_TIME;
+}
+
 //////////////////////////////////////////////////////////////////////////////
 // Pointing device driver
 

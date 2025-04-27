@@ -715,8 +715,11 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     }
 
 #ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
-    if (keycode == KC_NO && record->event.pressed) {
-        layer_move(0); // ★ここ！空欄押したら解除
+    // if (keycode == KC_NO && record->event.pressed) {
+    //     layer_move(0); // ★ここ！空欄押したら解除
+    // }
+    if ((keycode == KC_NO || keycode == KC_BTN1) && record->event.pressed) {
+        layer_move(0); // ★空欄か左クリック押したら即解除
     }
 #endif
 

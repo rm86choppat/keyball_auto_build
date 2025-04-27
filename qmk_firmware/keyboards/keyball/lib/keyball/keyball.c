@@ -738,9 +738,8 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 #ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
     // reduce auto mouse timeout if mouse key is pressed.
     if (keycode == KC_BTN1 && record->event.pressed) {
-        set_auto_mouse_enable(false); // オートマウスレイヤー解除
-        layer_move(0);                        // ← レイヤー0に戻す
-        keyball.total_mouse_movement = 0;     // ← 移動履歴もリセットする
+        set_auto_mouse_timeout(keyball_get_auto_mouse_timeout());
+        keyball.total_mouse_movement = 0;
     }
 #endif
 

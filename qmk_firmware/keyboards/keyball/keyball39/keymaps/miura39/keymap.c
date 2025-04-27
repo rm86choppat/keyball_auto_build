@@ -86,3 +86,9 @@ void oledkit_render_info_user(void) {
     keyball_oled_render_layerinfo();
 }
 #endif
+
+// デフォルトでAMLをON
+void pointing_device_init_user(void) {
+  set_auto_mouse_layer(1); // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
+  set_auto_mouse_enable(true);         // always required before the auto mouse feature will work
+}

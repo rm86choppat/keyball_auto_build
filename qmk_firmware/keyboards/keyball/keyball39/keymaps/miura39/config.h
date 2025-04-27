@@ -38,6 +38,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define POINTING_DEVICE_AUTO_MOUSE_ENABLE
 #define AUTO_MOUSE_DEFAULT_LAYER 1
 // オートマウスレイヤーのタイムアウト10分
-#define AUTO_MOUSE_LAYER_KEEP_TIME 600000
-
+#define AUTO_MOUSE_LAYER_KEEP_TIME 30000 // 自動マウスレイヤーのタイムアウトを30秒にして長くする
 #define DYNAMIC_KEYMAP_LAYER_COUNT 6

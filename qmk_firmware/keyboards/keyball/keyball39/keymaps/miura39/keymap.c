@@ -100,7 +100,7 @@ bool pointing_device_task_user(report_mouse_t *mouse_report) {
     static bool was_auto_mouse_layer_active = false;
 
     // 現在のオートマウスレイヤー状態を取得
-    bool is_auto_mouse_layer_active = is_auto_mouse_active;
+    bool is_auto_mouse_layer_active = is_auto_mouse_active();
 
     // 状態が変わったときだけ通知を出す
     if (is_auto_mouse_layer_active && !was_auto_mouse_layer_active) {

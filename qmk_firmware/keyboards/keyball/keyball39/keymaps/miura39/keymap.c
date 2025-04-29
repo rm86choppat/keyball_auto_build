@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
-
 #include "quantum.h"
+#include "pointing_device_auto_mouse.h" // オートマウスレイヤーの状態を確認するために必要
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -91,4 +91,28 @@ void oledkit_render_info_user(void) {
 void pointing_device_init_user(void) {
   set_auto_mouse_layer(1); // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
   set_auto_mouse_enable(true);         // always required before the auto mouse feature will work
+}
+
+// pointing_device_task_userはマウス動作時に呼ばれる
+// ここでオートマウスレイヤーの状態をチェックして、変化した瞬間だけ通知する
+bool pointing_device_task_user(report_mouse_t *mouse_report) {
+    // 前回のオートマウスレイヤー状態を保存する変数（関数内staticなので呼び出し間で値保持）
+    static bool was_auto_mouse_layer_active = false;
+
+    // 現在のオートマウスレイヤー状態を取得
+    bool is_auto_mouse_layer_active = is_auto_mouse_active;
+
+    // 状態が変わったときだけ通知を出す
+    if (is_auto_mouse_layer_active && !was_auto_mouse_layer_active) {
+        // オートマウスレイヤーに入った瞬間
+        uprintf("AML_ON\n");
+    } else if (!is_auto_mouse_layer_active && was_auto_mouse_layer_active) {
+        // オートマウスレイヤーを抜けた瞬間
+        uprintf("AML_OFF\n");
+    }
+
+    // 今回の状態を次回用に保存しておく
+    was_auto_mouse_layer_active = is_auto_mouse_layer_active;
+
+    return true; // trueを返して、通常のマウス処理を続行させる
 }

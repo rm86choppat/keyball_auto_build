@@ -96,6 +96,7 @@ void pointing_device_init_user(void) {
 
 // オートマウスレイヤーのON/OFF切り替え時に呼ばれる（公式weak関数）
 void auto_mouse_activation_user(bool activated) {
+  pointing_device_set_enabled(activated);
   if (activated) {
       uprintf("AML_ON\n");
   } else {

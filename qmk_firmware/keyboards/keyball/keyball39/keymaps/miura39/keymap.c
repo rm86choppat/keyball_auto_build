@@ -74,7 +74,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
       keyball_handle_auto_mouse_layer_change(state);
     #endif
 
-    uprintf("test\n");
+    // uprintf("test\n");
     // // AML通知
     // static bool was_mouse_active = false;
     // bool is_mouse_active = (state & (1 << AUTO_MOUSE_DEFAULT_LAYER)) != 0;

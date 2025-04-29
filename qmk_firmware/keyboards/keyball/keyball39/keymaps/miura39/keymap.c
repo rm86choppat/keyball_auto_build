@@ -19,7 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include "quantum.h"
 #include "pointing_device_auto_mouse.h" // オートマウスレイヤーの状態を確認するために必要
-#include "pointing_device.h"  
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -94,12 +93,17 @@ void pointing_device_init_user(void) {
   set_auto_mouse_enable(true);         // always required before the auto mouse feature will work
 }
 
-// オートマウスレイヤーのON/OFF切り替え時に呼ばれる（公式weak関数）
-void auto_mouse_activation_user(bool activated) {
-  pointing_device_set_enabled(activated);
-  if (activated) {
-      uprintf("AML_ON\n");
-  } else {
-      uprintf("AML_OFF\n");
-  }
+bool pointing_device_task_user(report_mouse_t *mouse_report) {
+    static bool was_active = false;
+    bool is_active = pointing_device_auto_mouse_is_enabled(); // or get_auto_mouse_toggle()
+
+    if (is_active && !was_active) {
+        uprintf("AML_ON\n");
+    } else if (!is_active && was_active) {
+        uprintf("AML_OFF\n");
+    }
+
+    was_active = is_active;
+
+    return true;
 }

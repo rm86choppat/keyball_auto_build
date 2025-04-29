@@ -45,7 +45,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // メカニカルロックサポートを無効化します。2015年に製造中止になったCherry MX Lockキースイッチ(ラッチ動作)をサポートする機能なので、現在必要とされる可能性は低いです。
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE
-#define NO_ACTION_TAPPING
+
+// 長押しできなくなるのでコメント
+// #define NO_ACTION_TAPPING
 // タップダンスと他のタップ機能を無効にします
 #define NO_ACTION_ONESHOT
 // ワンショットモディファイアを無効にします

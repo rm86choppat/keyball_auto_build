@@ -73,6 +73,19 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     #ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
       keyball_handle_auto_mouse_layer_change(state);
     #endif
+
+    // AML通知
+    static bool was_mouse_active = false;
+    bool is_mouse_active = (state & (1 << AUTO_MOUSE_DEFAULT_LAYER)) != 0;
+
+    if (is_mouse_active && !was_mouse_active) {
+        uprintf("AML_ON\n");
+    } else if (!is_mouse_active && was_mouse_active) {
+        uprintf("AML_OFF\n");
+    }
+
+    was_mouse_active = is_mouse_active;
+
     return state;
 }
 
@@ -91,19 +104,4 @@ void oledkit_render_info_user(void) {
 void pointing_device_init_user(void) {
   set_auto_mouse_layer(1); // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
   set_auto_mouse_enable(true);         // always required before the auto mouse feature will work
-}
-
-bool pointing_device_task_user(report_mouse_t *mouse_report) {
-    static bool was_active = false;
-    bool is_active = pointing_device_auto_mouse_is_enabled(); // or get_auto_mouse_toggle()
-
-    if (is_active && !was_active) {
-        uprintf("AML_ON\n");
-    } else if (!is_active && was_active) {
-        uprintf("AML_OFF\n");
-    }
-
-    was_active = is_active;
-
-    return true;
 }

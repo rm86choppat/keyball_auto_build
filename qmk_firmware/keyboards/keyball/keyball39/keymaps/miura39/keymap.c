@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include "quantum.h"
 #include "pointing_device_auto_mouse.h" // オートマウスレイヤーの状態を確認するために必要
+#include "pointing_device.h"  
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {

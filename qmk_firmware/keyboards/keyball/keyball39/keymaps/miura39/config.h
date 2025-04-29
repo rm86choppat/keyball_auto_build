@@ -55,5 +55,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 古い形式のマクロ処理を無効にします: MACRO() & action_get_macro
 #define NO_ACTION_FUNCTION
 #define NO_MUSIC_MODE
-// レイヤーを16枚にする
-#define LAYER_STATE_16BIT
+// レイヤーを8枚にする
+#define LAYER_STATE_8BIT

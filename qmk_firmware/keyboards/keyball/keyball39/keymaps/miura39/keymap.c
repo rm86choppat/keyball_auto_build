@@ -89,3 +89,13 @@ void oledkit_render_info_user(void) {
     keyball_oled_render_layerinfo();
 }
 #endif
+
+// 容量削減
+// https://zenn.dev/koron/articles/98324ab760e83a
+uint16_t keycode_config(uint16_t keycode) {
+  return keycode;
+}
+
+uint8_t mod_config(uint8_t mod) {
+  return mod;
+}
